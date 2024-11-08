@@ -36,3 +36,23 @@ if(__name__=="__main__"):
 	session.post(loginHost+loginForm["action"], data=payload);
 
 	page=session.get("https://ssl.jobcan.jp/jbcoauth/login");
+	data=page.text;
+	body=BeautifulSoup(data, "lxml");
+	payload={};
+
+	if(not "--groupId" in runKeys.keys()):
+		payload["adit_group_id"]=body.find("select", {"id":"adit_group_id"}).find("option")["value"];
+	else:
+		payload["adit_group_id"]=runKeys["--groupId"];
+	payload["token"]=body.find("input", {"name":"token"})["value"];
+	if(not "--nightShift" in runKeys.keys()):
+		payload["is_yakin"]=0;
+	else:
+		payload["is_yakin"]=runKeys["--nightShift"];
+	if(not "--notice" in runKeys.keys()):
+		payload["notice"]="";
+	else:
+		payload["notice"]=runKeys["--notice"];
+	payload["adit_item"]="DEF";
+
+#	session.post("https://ssl.jobcan.jp/employee/index/adit", data=payload);
