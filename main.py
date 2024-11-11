@@ -55,4 +55,4 @@ if(__name__=="__main__"):
 		payload["notice"]=runKeys["--notice"];
 	payload["adit_item"]="DEF";
 
-#	session.post("https://ssl.jobcan.jp/employee/index/adit", data=payload);
+	session.post("https://ssl.jobcan.jp/employee/index/adit", data=payload);
