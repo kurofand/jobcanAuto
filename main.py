@@ -1,9 +1,11 @@
 #-*-coding:utf-8-*-
 
 import sys
+import random
 import requests
 
 from bs4 import BeautifulSoup
+from time import sleep
 
 if(__name__=="__main__"):
 	runKeys={};
@@ -20,6 +22,9 @@ if(__name__=="__main__"):
 		if(not mandatoryKey in runKeys):
 			print("\"%s\" argument is missing!"%mandatoryKey);
 			exit();
+
+	if("--randomizeTime" in runKeys.keys()):
+		sleep(random.randint(0, int(runKeys["--randomizeTime"]))*60);
 
 	session=requests.Session();
 	loginHost="https://id.jobcan.jp";
